@@ -29,10 +29,10 @@ Installation
 
 As of yet, nothing to see here. As a 'heads up' we're looking at needing: 
 
-Apache HTTPD server, probably v2.2 as that's the current latest and greatest
-PHP 5.4
-Slim framework
-Twig templates
-MongoDB 2.4
+* Apache HTTPD server, probably v2.2 as that's the current latest and greatest
+* PHP 5.4
+* Slim framework
+* Twig templates
+* MongoDB 2.4
 
 
