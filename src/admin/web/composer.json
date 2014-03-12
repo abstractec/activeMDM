@@ -1,4 +1,4 @@
-{
+get_config{
 	"require": {
 		"twig/twig": "1.*",
         "slim/views": "0.1.*",

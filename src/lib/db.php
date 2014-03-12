@@ -9,7 +9,10 @@ function get_config() {
 		return null;
 	} else {
 		return $config->getNext();
-	}
+	}	
+}
+
+function get_profile($profile_uuid) {
 	
 }
 
