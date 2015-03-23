@@ -31,13 +31,29 @@
 
 		
 		<div class="container" role="main">
-			{% if error is defined %}
+			{% if flash.success is defined %}
 			<div class="row">
-				<div id="error" class="alert alert-warning">flange{{ error }}</div>
+				<div id="error" class="alert alert-success">{{ flash.success }}</div>
+			</div>
+			{% endif %}
+			{% if flash.info is defined %}
+			<div class="row">
+				<div id="error" class="alert alert-info">{{ flash.info }}</div>
+			</div>
+			{% endif %}
+			{% if flash.warning is defined %}
+			<div class="row">
+				<div id="error" class="alert alert-warning">{{ flash.warning }}</div>
+			</div>
+			{% endif %}
+			{% if flash.danger is defined %}
+			<div class="row">
+				<div id="error" class="alert alert-danger">{{ flash.danger }}</div>
 			</div>
 			{% endif %}
 	
 			{% block content %}{% endblock %}
+			<hr/>
 			<footer>
 			  <p>&copy; Abstractec 2014</p>
 			</footer>

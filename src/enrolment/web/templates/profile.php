@@ -1,6 +1,4 @@
-<?xml version="1.0"?>
 <plist version="1.0">
-	<f:view contentType="application/x-apple-aspen-config">
 	<dict>
 		<key>PayloadContent</key>
 		<array>

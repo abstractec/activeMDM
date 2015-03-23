@@ -57,6 +57,7 @@ $slim->get('/enrol', function () use ($slim) {
 		);
 	}
 	
+	$slim->response->headers->set('Content-Type', 'application/x-apple-aspen-config');
 	
 	$slim->render('profile.php', array("config" => $config));
 })->name('enrol');
