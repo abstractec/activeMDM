@@ -8,17 +8,17 @@ $slim = new \Slim\Slim(array(
 	'view' => new \Slim\Views\Twig()
 ));
 
-$slim->add(new \Slim\Middleware\SessionCookie(array(
-		'expires' => false,
-		'path' => '/',
-		'domain' => null,
-		'httponly' => false,
-		'name' => 'wfm-session',
-		'cookies.encrypt' => true,
-		'secret' => "123123", //$settings['auth_secret'],
-		'cipher' => MCRYPT_RIJNDAEL_256,
-		'cipher_mode' => MCRYPT_MODE_CBC
-)));
+// $slim->add(new \Slim\Middleware\SessionCookie(array(
+// 		'expires' => false,
+// 		'path' => '/',
+// 		'domain' => null,
+// 		'httponly' => false,
+// 		'name' => 'wfm-session',
+// 		'cookies.encrypt' => true,
+// 		'secret' => "123123", //$settings['auth_secret'],
+// 		'cipher' => MCRYPT_RIJNDAEL_256,
+// 		'cipher_mode' => MCRYPT_MODE_CBC
+// )));
 
 $view = $slim->view();
 $view->parserOptions = array(
@@ -43,7 +43,7 @@ $slim->get('/index', function () use ($slim) {
 	$slim->render('index.php');
 })->name("index");
 
-$slim->post('/checkin', function () use ($slim) {
+$slim->put('/checkin', function () use ($slim) {
 	// read data, do things
 	
 	$body = $slim->request->getBody();
@@ -60,17 +60,29 @@ $slim->post('/checkin', function () use ($slim) {
 		if ($message_type == "Authenticate") {
 			// TODO: authentication
 			
-			echo "<pre>Authenticate</pre>";
+			// grab our UUID and create/update our data
+			$udid = $message["UDID"];
+			
+			$device = array();
+			$device["udid"] = $udid;
 			
 			// we just return an 'OK' here
+			create_device($device);
+			
+			// now, send back a response
+			$res_plist = new \CFPropertyList\CFPropertyList();
+			$res_plist->add( $dict = new \CFPropertyList\CFDictionary() );
 			
 			
+			echo ($res_plist->toXML());
 		} elseif ($message_type == "TokenUpdate") {
-			echo "<pre>TokenUpdate</pre>";
 			update_device_token($message);
 			
+			$res_plist = new \CFPropertyList\CFPropertyList();
+			$res_plist->add( $dict = new \CFPropertyList\CFDictionary() );
+			
+			echo ($res_plist->toXML());
 		} elseif ($message_type == "CheckOut") {
-			echo "<pre>CheckOut</pre>";
 			check_out_device($message);
 			
 			// the device is leaving our MDM zone, so we need to set the values for 

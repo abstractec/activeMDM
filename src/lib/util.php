@@ -18,20 +18,24 @@ function passcode_profile_array($post_values) {
 
 function update_device_token($plist_array) {
 	// find my device
-	$device_udid = $plist_array->UDID;
+	$device = find_device($plist_array["UDID"]);
 	
-	$device = find_device($device_udid);
-	
-	$device->PushMagic = $plist_array->PushMagic;
-	$device->UnlockToken = $plist_array->UnlockToken;
-	$device->Token = $plist_array->Token;
+	if (isset($device)) {
+		$device["udid"] = $plist_array["UDID"];
+		$device["pushMagic"] = $plist_array["PushMagic"];
+		$device["unlockToken"] = $plist_array["UnlockToken"];
+		$device["token"] = $plist_array["Token"];
+		
+		update_device($device);
+	} 
 }
 
 function check_out_device($plist_array) {
-	$device_udid = $plist_array->UDID;
+	$device = find_device($plist_array["UDID"]);
 	
-	$device = find_device($device_udid);
-	$device->CheckoutDate = time();
+	$device["checkoutDate"] = time();
+
+	update_device($device);
 }
 
 ?>
