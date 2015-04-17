@@ -4,7 +4,7 @@
         "slim/views": "0.1.*",
         "smarty/smarty": "*",
         "slim/extras": "*",
-        "rodneyrehm/plist": "dev-master",
+        "abstractec/plist": "dev-master",
 	"duccio/apns-php" : "dev-master"
 	}
 }
