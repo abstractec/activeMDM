@@ -1,5 +1,9 @@
 <?php
 
+// ----------------------------------------------------------------------------
+// Config functions
+// ----------------------------------------------------------------------------
+
 function get_config() {
 	$db = get_connection();
 	
@@ -18,6 +22,9 @@ function save_config($id, $values) {
 	$config = $db->config->update(array("_id" => $id), $values);
 }
 
+// ----------------------------------------------------------------------------
+// Profile functions
+// ----------------------------------------------------------------------------
 
 function get_profiles() {
 	$db = get_connection();
@@ -36,7 +43,9 @@ function get_profile($profile_uuid) {
 	
 }
 
+// ----------------------------------------------------------------------------
 // device functions
+// ----------------------------------------------------------------------------
 
 function create_device($device) {
 	$dev = find_device($device["udid"]);
@@ -44,22 +53,17 @@ function create_device($device) {
 	// var_dump($cur.count(true));
 	
 	if (isset($dev)) {
-		var_dump("updating");
 		update_device($device);
 	} else {
-		var_dump("saving");
 		// we don't know about this device
 		$db = get_connection();
 		
 		$device["created"] = timestamp();
 		$db->device->save($device);
-	}
-	
+	}	
 }
 
 function find_device($device_udid) {
-	var_dump($device_udid);
-	
 	$db = get_connection();
 	$cur = $db->device->findOne(array("udid" => $device_udid));
 	
@@ -74,19 +78,79 @@ function find_device($device_udid) {
 function update_device($device) {
 	$db = get_connection();
 	$ins = $db->device->update(array("udid" => $device["udid"]), $device);
-	
-	// var_dump($ins);
 } 
 
 function delete_device($device) {
+	$db = get_connection();
+	$ins = $db->device->delete(array("udid" => $device["udid"]));
+}
+
+function all_devices() {
+	$db = get_connection();
+	$cur = $db->device->find();
+	
+	return iterator_to_array($cur);
+}
+
+// ----------------------------------------------------------------------------
+// Status functions
+// ----------------------------------------------------------------------------
+
+function add_device_status($device_udid, $status) {
+	$db = get_connection();
+	$db->status->save(array("device_udid" => $device_udid, 
+							"status" => $status, 
+							"created" => timestamp()));
+}
+
+// ----------------------------------------------------------------------------
+// Command functions
+// ----------------------------------------------------------------------------
+
+function add_command($device, $command) {
+	$db = get_connection();
+	$db->queue->save(array("device_udid" => $device["udid"], 
+							"command" => $command, 
+							"created" => timestamp()));
 	
 }
 
-function add_status($device_udid, $status) {
+function next_command_for_device($device) {
 	$db = get_connection();
-	$db->status->save(array("device_udid" => $device_udid, "status" => $status, "created" => timestamp()));
+	$cur = $db->queue->findOne(array("device_udid" => $device["udid"]));
+	
+	return $cur;
+}
+	
+
+function commands_for_device($device) {
+	$db = get_connection();
+	$cur = $db->queue->find(array("device_udid" => $device["udid"]));
+	
+	return iterator_to_array($cur);
 }
 
+// ----------------------------------------------------------------------------
+// Queue functions
+// ----------------------------------------------------------------------------
+function find_queue_command($command_uuid) {
+	$db = get_connection();
+	
+	$query = "{\"command.CommandUUID\" : { \$in : [\"$command_uuid\"]}}";
+	
+	$cur = $db->queue->findOne(array("command.CommandUUID" => $command_uuid));
+	
+	return $cur;
+}
+
+function delete_queue_command($queue_command) {
+	$db = get_connection();
+	$cur = $db->queue->remove(array('_id' => $queue_command["_id"]));
+}
+
+// ----------------------------------------------------------------------------
+// Connection stuff
+// ----------------------------------------------------------------------------
 
 function get_connection() {
 	$m = new MongoClient(); 

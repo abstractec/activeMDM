@@ -42,7 +42,7 @@ function log_device_status($device, $status) {
 	$device = find_device($device["udid"]);
 	
 	if(isset($device)) {
-		add_status($device["udid"], $status);
+		add_device_status($device["udid"], $status);
 	}
 }
 

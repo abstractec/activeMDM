@@ -2,23 +2,26 @@
 require 'vendor/autoload.php';
 require '../../lib/db.php';
 require '../../lib/util.php';
+require '../../lib/command.php';
+
+use Rhumsaa\Uuid\Uuid;
 
 $slim = new \Slim\Slim(array(
 	'debug' => true,
 	'view' => new \Slim\Views\Twig()
 ));
 
-$slim->add(new \Slim\Middleware\SessionCookie(array(
-		'expires' => false,
-		'path' => '/',
-		'domain' => null,
-		'httponly' => false,
-		'name' => 'wfm-session',
-		'cookies.encrypt' => true,
-		'secret' => $settings['auth_secret'],
-		'cipher' => MCRYPT_RIJNDAEL_256,
-		'cipher_mode' => MCRYPT_MODE_CBC
-)));
+// $slim->add(new \Slim\Middleware\SessionCookie(array(
+// 		'expires' => false,
+// 		'path' => '/',
+// 		'domain' => null,
+// 		'httponly' => false,
+// 		'name' => 'wfm-session',
+// 		'cookies.encrypt' => true,
+// 		'secret' => $settings['auth_secret'],
+// 		'cipher' => MCRYPT_RIJNDAEL_256,
+// 		'cipher_mode' => MCRYPT_MODE_CBC
+// )));
 
 $view = $slim->view();
 $view->parserOptions = array(
@@ -32,7 +35,7 @@ $view->parserExtensions = array(
 /**
 Root URL
 */
-$slim->get('/', function() use ($slim, $rootURL) {
+$slim->get('/', function() use ($slim) {
 	$slim->response()->redirect('index.php/index');
 });
 
@@ -127,6 +130,30 @@ $slim->post('/profiles/new', function () use ($slim) {
 	}
 	
 })->name("create_profile");
+
+/**
+Device pages
+*/
+
+$slim->get('/device/all', function () use ($slim) {
+	$devices = all_devices();
+	
+	$slim->render('devices/all.php', array("devices" => $devices));
+})->name("devices");
+
+$slim->get('/device/:udid', function ($udid) use ($slim) {
+	
+})->name("device_detail");
+
+$slim->get('/device/:udid/lock', function ($udid) use ($slim) {
+	$device = find_device($udid);
+		
+	$command = create_device_lock();
+	add_command($device, $command);
+	
+	var_dump($device);
+})->name("device_lock");
+
 
 $slim->run();
 

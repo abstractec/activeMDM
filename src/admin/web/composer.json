@@ -1,8 +1,9 @@
-get_config{
-	"require": {
-		"twig/twig": "1.*",
+{
+    "require": {
+	"twig/twig": "1.*",
         "slim/views": "0.1.*",
         "smarty/smarty": "*",
-        "slim/extras": "*"
-	}
+        "slim/extras": "*",
+	"rhumsaa/uuid": "2.8.*@dev"
+    }
 }

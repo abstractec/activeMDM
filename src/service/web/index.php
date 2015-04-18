@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 require '../../lib/db.php';
 require '../../lib/util.php';
+require '../../lib/command.php';
 
 $slim = new \Slim\Slim(array(
 	'debug' => true,
@@ -48,11 +49,48 @@ $slim->put('/', function() use ($slim) {
 		$device = find_device($udid);
 		
 		// do we have any commands for this device?
+		if (isset($message["CommandUUID"])) {
+			// responding to message
+			// find my command on the queue and move it
+			$queue_command = find_queue_command($message["CommandUUID"]);
+			
+			if (isset($queue_command)) {
+				delete_queue_command($queue_command);
+			}
+			
+			
+		} else {
+			// we're just responding to an initial request
+			log_device_status($device, $message["Status"]);
+		}
 		
-		log_device_status($device, $message["Status"]);
+		$command = next_command_for_device($device);
+		
+		if (isset($command) > 0) {
+			// send back the first command
+			$inner_command = $command["command"];
+		
+			$res_plist = new \CFPropertyList\CFPropertyList();
+			$res_plist->add( $dict = new \CFPropertyList\CFDictionary() );
+			$request_dict = new \CFPropertyList\CFDictionary();
+			
+			if ($inner_command["Command"]["RequestType"] == "DeviceLock") {
+				$request_dict->add('RequestType', new \CFPropertyList\CFString("DeviceLock"));
+			}
+			
+			$dict->add("Command", $request_dict);
+			$dict->add("CommandUUID", new \CFPropertyList\CFString($inner_command["CommandUUID"]));			
+			
+			echo ($res_plist->toXML(true));
+		} else {
+			// empty plist for you
+			$res_plist = new \CFPropertyList\CFPropertyList();
+			$res_plist->add( $dict = new \CFPropertyList\CFDictionary() );
+			
+			echo ($res_plist->toXML(true));
+		}
+		
 	}
-		
-	
 });
 
 
