@@ -32,16 +32,29 @@ $view->parserExtensions = array(
 /**
 Root URL
 */
-$slim->get('/', function() use ($slim) {
-	$slim->response()->redirect('index.php/index');
+$slim->put('/', function() use ($slim) {
+	$body = $slim->request->getBody();
+	
+	if (!isset($body) || strlen($body) == 0) {
+		$app->response()->status(401); // not authorised
+	} else {	
+		$plist = new \CFPropertyList\CFPropertyList();
+		$plist->parse($body);
+		
+		$message = $plist->toArray();
+		
+		$udid = $message["UDID"];
+		
+		$device = find_device($udid);
+		
+		// do we have any commands for this device?
+		
+		log_device_status($device, $message["Status"]);
+	}
+		
+	
 });
 
-/**
-The index page
-*/
-$slim->get('/index', function () use ($slim) {
-	$slim->render('index.php');
-})->name("index");
 
 $slim->put('/checkin', function () use ($slim) {
 	// read data, do things

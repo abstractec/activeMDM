@@ -50,6 +50,8 @@ function create_device($device) {
 		var_dump("saving");
 		// we don't know about this device
 		$db = get_connection();
+		
+		$device["created"] = timestamp();
 		$db->device->save($device);
 	}
 	
@@ -59,11 +61,11 @@ function find_device($device_udid) {
 	var_dump($device_udid);
 	
 	$db = get_connection();
-	$cur = $db->device->find(array("udid" => $device_udid));
+	$cur = $db->device->findOne(array("udid" => $device_udid));
 	
-	if (count(iterator_to_array($cur)) > 0) {
+	if (isset($cur)) {
 		// get the next thing and return it
-		return(iterator_to_array($cur));
+		return($cur);
 	} else {
 		return null;
 	}
@@ -79,6 +81,12 @@ function update_device($device) {
 function delete_device($device) {
 	
 }
+
+function add_status($device_udid, $status) {
+	$db = get_connection();
+	$db->status->save(array("device_udid" => $device_udid, "status" => $status, "created" => timestamp()));
+}
+
 
 function get_connection() {
 	$m = new MongoClient(); 

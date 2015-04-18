@@ -38,4 +38,16 @@ function check_out_device($plist_array) {
 	update_device($device);
 }
 
+function log_device_status($device, $status) {
+	$device = find_device($device["udid"]);
+	
+	if(isset($device)) {
+		add_status($device["udid"], $status);
+	}
+}
+
+function timestamp() {
+	return date(DATE_ATOM, time());
+}
+
 ?>
