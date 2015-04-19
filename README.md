@@ -9,12 +9,12 @@ The initial goals of this project are to create a fully-functional MDM server fo
 1. Server job to poll a queue of devices that need to be told to refresh data and send messages via APNS to said devices
 1. Web service to respond to devices which are either enrolling or responding to an APNS message
 
-At this point (27th Feb 2014) the goals for v0.1 are:
+At this point the goals for v0.1 are:
 
 1. iOS and OSX support
 1. Device enrolment
 1. APNS interaction
-1. Device lock working
+1. Device lock working on a device
 
 Currently, the goals for v0.1 do *not* include: 
 
@@ -30,11 +30,11 @@ Installation
 
 We need: 
 
-* Apache HTTPD server, probably v2.2 as that's the current latest and greatest
-* PHP 5.4
+* Apache HTTPD server: whatever is the current latest and greatest
+* PHP 5.4+
 * Slim framework
 * Twig templates
-* MongoDB 2.4
+* MongoDB 2.4+
 
 ActiveMDM uses the CFPropertyList project (https://github.com/rodneyrehm/CFPropertyList), however you will have to modify the call to saveXML call in the toXML function in CFPropertyList.php (line 418 ish) to 
 

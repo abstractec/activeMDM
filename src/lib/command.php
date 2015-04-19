@@ -15,7 +15,5 @@ function create_device_lock() {
 	$command["CommandUUID"] = \Rhumsaa\Uuid\Uuid::uuid4()->toString();
 	$command["Command"] = $commandContent;
 	
-	var_dump($command);
-	
 	return $command;
 }

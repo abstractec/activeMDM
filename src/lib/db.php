@@ -18,8 +18,12 @@ function get_config() {
 
 function save_config($id, $values) {
 	$db = get_connection();
-
-	$config = $db->config->update(array("_id" => $id), $values);
+	
+	if (!isset(get_config())) {
+		$config = $db->config->save($values);
+	} else {
+		$config = $db->config->update(array("_id" => $id), $values);
+	}
 }
 
 // ----------------------------------------------------------------------------
