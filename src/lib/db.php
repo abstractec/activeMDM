@@ -20,7 +20,7 @@ function save_config($id, $values) {
 	$db = get_connection();
 	
 	if (!isset(get_config())) {
-		$config = $db->config->save($values);
+		$db->config->save($values);
 	} else {
 		$config = $db->config->update(array("_id" => $id), $values);
 	}

@@ -20,7 +20,7 @@ $view->parserExtensions = array(
 /**
 Root URL
 */
-$slim->get('/', function() use ($slim, $rootURL) {
+$slim->get('/', function() use ($slim) {
 	$slim->response()->redirect('index.php/index');
 });
 
