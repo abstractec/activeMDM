@@ -19,7 +19,9 @@ function get_config() {
 function save_config($id, $values) {
 	$db = get_connection();
 	
-	if (!isset(get_config())) {
+	$config = get_config();
+	
+	if (!isset($config)) {
 		$db->config->save($values);
 	} else {
 		$config = $db->config->update(array("_id" => $id), $values);
