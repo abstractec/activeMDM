@@ -38,7 +38,7 @@ We need:
 
 ActiveMDM uses the CFPropertyList project (https://github.com/rodneyrehm/CFPropertyList), however you will have to modify the call to saveXML call in the toXML function in CFPropertyList.php (line 418 ish) to 
 
-$doc->saveXML($doc, LIBXML_NOEMPTYTAG)
+`$doc->saveXML($doc, LIBXML_NOEMPTYTAG)`
 
 Otherwise you'll end up with empty entities that aren't closed and that will cause the MDM payloads to fail on the device. We've forked CFPropertyList and made the change here: https://github.com/abstractec/CFPropertyList - if you install using composer (and you probably should), our forked version will be included in the project.
 
