@@ -5,6 +5,6 @@
         "smarty/smarty": "*",
         "slim/extras": "*",
 	"rhumsaa/uuid": "2.8.*@dev",
-	"duccio/apns-php" : "dev-master"
+	"abstractec/apns-php" : "dev-master"
     }
 }
