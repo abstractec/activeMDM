@@ -152,9 +152,12 @@ $slim->get('/device/:udid/lock', function ($udid) use ($slim) {
 	add_command($device, $command);
 	
 	$push = new \ApnsPHP_Push(
-		\ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
-		'server_certificates_bundle_sandbox.pem'
+		\ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION,
+		'/home/jimbob/apns-push-production.p12'
 	);
+
+
+	
 	
 	var_dump($device);
 })->name("device_lock");

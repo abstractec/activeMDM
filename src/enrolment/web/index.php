@@ -38,7 +38,7 @@ $slim->get('/enrol', function () use ($slim) {
 	// $slim->contentType('application/x-apple-aspen-config');
 	
 	$config = get_config();
-	
+
 	if (!isset($config)) {
 		$config = array(
 			"access_rights" => 1024,

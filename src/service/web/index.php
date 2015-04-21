@@ -93,19 +93,29 @@ $slim->put('/', function() use ($slim) {
 	}
 });
 
+$slim->get('/checkin', function() use ($slim) {
+	//doCheckin($slim);
+});
 
 $slim->put('/checkin', function () use ($slim) {
 	// read data, do things
 	
 	$body = $slim->request->getBody();
-	
+
 	if (!isset($body) || strlen($body) == 0) {
-		$app->response()->status(401); // not authorised
+		$slim->response()->status(401); // not authorised
 	} else {
+		$body = str_replace("#012", "", $body);
+		$body = str_replace("#011", "", $body);
+		syslog(LOG_DEBUG, "c");
+		
+		syslog(LOG_DEBUG, $body);
+
 		$plist = new \CFPropertyList\CFPropertyList();
 		$plist->parse($body);
 		
 		$message = $plist->toArray();
+
 		$message_type = $message["MessageType"];
 		
 		if ($message_type == "Authenticate") {
@@ -143,7 +153,7 @@ $slim->put('/checkin', function () use ($slim) {
 	}
 	
 	// $slim->render('index.php');
-})->name("checkin");
+});
 
 
 

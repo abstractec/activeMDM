@@ -23,8 +23,8 @@ function update_device_token($plist_array) {
 	if (isset($device)) {
 		$device["udid"] = $plist_array["UDID"];
 		$device["pushMagic"] = $plist_array["PushMagic"];
-		$device["unlockToken"] = $plist_array["UnlockToken"];
-		$device["token"] = $plist_array["Token"];
+		//$device["unlockToken"] = $plist_array["Token"];
+		//$device["token"] = $plist_array["Token"];
 		
 		update_device($device);
 	} 
