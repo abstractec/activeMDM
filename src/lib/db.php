@@ -7,24 +7,27 @@
 function get_config() {
 	$db = get_connection();
 	
-	$config = $db->config->find();
+	$conf = $db->config->find();	
 	
-	if ($config->count() == 0) {
+	if ($conf->count() == 0) {
 		return null;
 	} else {
-		return $config->getNext();
+		$config = new Config();
+		$config->setValues($conf->getNext(););
+
+		return 
 	}	
 }
 
-function save_config($id, $values) {
+function save_config($id, $config) {
 	$db = get_connection();
 	
-	$config = get_config();
+	$check_config = get_config();
 	
-	if (!isset($config)) {
-		$db->config->save($values);
+	if (!isset($check_config)) {
+		$db->config->save($config->getValues());
 	} else {
-		$config = $db->config->update(array("_id" => $id), $values);
+		$db->config->update(array("_id" => $id), $config->getValues());
 	}
 }
 
