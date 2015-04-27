@@ -12,7 +12,7 @@ function create_device_lock() {
 	
 	$commandContent["RequestType"] = "DeviceLock";
 	
-	$command["CommandUUID"] = \Rhumsaa\Uuid\Uuid::uuid4()->toString();
+	$command["CommandUUID"] = \Ramsey\Uuid\Uuid::uuid4()->toString();
 	$command["Command"] = $commandContent;
 	
 	return $command;
