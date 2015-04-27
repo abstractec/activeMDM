@@ -146,20 +146,12 @@ $slim->get('/device/:udid', function ($udid) use ($slim) {
 })->name("device_detail");
 
 $slim->get('/device/:udid/lock', function ($udid) use ($slim) {
-	$device = find_device($udid);
-		
-	$command = create_device_lock();
-	add_command($device, $command);
-	
-	$push = new \ApnsPHP_Push(
-		\ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION,
-		'/home/jimbob/apns-push-production.p12'
-	);
+    $device = find_device($udid);
+            
+    $command = create_device_lock();
+    add_command($device, $command);
 
-
-	
-	
-	var_dump($device);
+	send_push($device);
 })->name("device_lock");
 
 

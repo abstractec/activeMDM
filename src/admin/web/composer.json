@@ -4,7 +4,7 @@
         "slim/views": "0.1.*",
         "smarty/smarty": "*",
         "slim/extras": "*",
-	"rhumsaa/uuid": "2.8.*@dev",
-	"abstractec/apns-php" : "dev-master"
+	"ramsey/uuid": "dev-master",
+	"duccio/apns-php" : "dev-master"
     }
 }

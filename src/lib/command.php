@@ -4,7 +4,7 @@
 // Device Lock function
 // ----------------------------------------------------------------------------
 
-use \Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 function create_device_lock() {
 	$command = array();

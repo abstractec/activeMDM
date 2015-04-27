@@ -46,6 +46,40 @@ function log_device_status($device, $status) {
 	}
 }
 
+function send_push($device) {
+    $deviceToken = unpack('H*', base64_decode($device["deviceToken"]));
+    $deviceToken = $deviceToken[1];
+
+    date_default_timezone_set('Europe/London');
+
+    $push = new ApnsPHP_Push(
+            ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION,
+            '/home/jimbob/final_aps_prod.pem'
+    );
+    $push->setProviderCertificatePassphrase('FunCrate321'); 
+
+    $push->connect();
+
+    $message = new ApnsPHP_Message($deviceToken);
+    // Set a custom property
+    $message->setCustomProperty('mdm', $device['pushMagic']);
+    // Set the expiry value to 30 seconds
+    $message->setExpiry(30);
+    $push->add($message);
+
+    var_dump($message->getPayload());
+    // Send all messages in the message queue
+    $push->send();
+    // Disconnect from the Apple Push Notification Service
+    $push->disconnect();
+    // Examine the error message container
+    $aErrorQueue = $push->getErrors();
+    if (!empty($aErrorQueue)) {
+            var_dump($aErrorQueue);
+    }
+	
+}
+
 function timestamp() {
 	return date(DATE_ATOM, time());
 }
