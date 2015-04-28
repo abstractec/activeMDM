@@ -3,10 +3,7 @@ require 'vendor/autoload.php';
 require '../../lib/db.php';
 require '../../lib/util.php';
 require '../../lib/command.php';
-
-function __autoload($class_name) {
-    include '../../lib/Classes/'.$class_name . '.php';
-}
+require '../../lib/classes/Config.php';
 
 $slim = new \Slim\Slim(array(
 	'debug' => true,
