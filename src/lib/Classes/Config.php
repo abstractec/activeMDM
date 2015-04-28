@@ -15,8 +15,8 @@ class Config {
         $ret = array();
 
         $ret["access_rights"] = $this->accessRights;
-        $ret["organisation_name"] = $this->$organisationName;
-        $ret["master_profile_uuid"] = $this->accessRights;
+        $ret["organisation_name"] = $this->organisationName;
+        $ret["master_profile_uuid"] = $this->masterProfileUUID;
         $ret["cert_uuid"] = $this->certUUID;
         $ret["mdm_uuid"] = $this->mdmUUID;
         $ret["mdm_certificate_password"] = $this->mdmCertificatePassword;
@@ -30,7 +30,7 @@ class Config {
     public function setValues($values) {
         $this->accessRights = $values["access_rights"];
         $this->organisationName = $values["organisation_name"];
-        $this->accessRights = $values["master_profile_uuid"];
+        $this->masterProfileUUID = $values["master_profile_uuid"];
         $this->certUUID = $values["cert_uuid"];
         $this->mdmUUID = $values["mdm_uuid"];
         $this->mdmCertificatePassword = $values["mdm_certificate_password"];

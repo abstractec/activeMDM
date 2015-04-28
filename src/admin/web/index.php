@@ -4,11 +4,10 @@ require '../../lib/db.php';
 require '../../lib/util.php';
 require '../../lib/command.php';
 
+include '../../lib/Classes/Config.php';
+
 use Rhumsaa\Uuid\Uuid;
 
-function __autoload($class_name) {
-    include '../../lib/Classes/'.$class_name . '.php';
-}
 
 $slim = new \Slim\Slim(array(
 	'debug' => true,
