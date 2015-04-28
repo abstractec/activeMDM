@@ -12,10 +12,12 @@ function get_config() {
 	if ($conf->count() == 0) {
 		return null;
 	} else {
-		$config = new Config();
-		$config->setValues($conf->getNext(););
+        $values = $conf->getNext();
+        $config = new Config();
+        $config->setValues($values);
+        $config->id = $values["_id"];
 
-		return 
+		return $config
 	}	
 }
 
@@ -25,9 +27,9 @@ function save_config($id, $config) {
 	$check_config = get_config();
 	
 	if (!isset($check_config)) {
-		$db->config->save($config->getValues());
+		$db->config->save($config);
 	} else {
-		$db->config->update(array("_id" => $id), $config->getValues());
+		$db->config->update(array("_id" => $id), $config);
 	}
 }
 

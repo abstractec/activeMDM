@@ -4,31 +4,31 @@
 		<array>
 			<dict>
 				<key>AccessRights</key>
-				<integer>{{ config.access_rights }}</integer>
+				<integer>{{ config.accessRights }}</integer>
 				<key>CheckInURL</key>
-				<string>{{ config.check_in_url }}</string>
+				<string>{{ config.rootURL }}/service/index.php/checkin</string>
 				<key>IdentityCertificateUUID</key>
-				<string>{{ config.cert_uuid }}</string>
+				<string>{{ config.certUUID }}</string>
 				<key>PayloadDescription</key>
 				<string>Configures Mobile Device Management</string>
 				<key>PayloadDisplayName</key>
 				<string>Mobile Device Management</string>
 				<key>PayloadIdentifier</key>
-				<string>com.madpartners.mdm.mdm</string>
+				<string>com.activemdm.enrolment</string>
 				<key>PayloadOrganization</key>
-				<string>{{ config.organisation_name }}</string>
+				<string>{{ config.organisationName }}</string>
 				<key>PayloadType</key>
 				<string>com.apple.mdm</string>
 				<key>PayloadUUID</key>
-				<string>{{ config.mdm_uuid }}</string>
+				<string>{{ config.mdmUUID }}</string>
 				<key>PayloadVersion</key>
 				<integer>1</integer>
 				<key>ServerURL</key>
-				<string>{{ config.service_url }}</string>
+				<string>{{ config.rootURL }}/service/index.php/</string>
 				<key>SignMessage</key>
 				<false/>
 				<key>Topic</key>
-				<string>{{ config.mdm_topic }}</string>
+				<string>{{ config.pushTopic }}</string>
 				<key>UseDevelopmentAPNS</key>
 				<false/>
 				<key>CheckOutWhenRemoved</key>
@@ -36,12 +36,12 @@
 			</dict>
 			<dict>
 				<key>Password</key>
-				<string>{{ config.mdm_certificate_password }}</string>
+				<string>{{ config.mdmCertificatePassword }}</string>
 				<key>PayloadCertificateFileName</key>
 				<string>eas.p12</string>
 				<key>PayloadContent</key>
 				<data>
-					{{ config.mdm_certificate }}
+					{{ config.mdmCertificate }}
 				</data>
 				<key>PayloadDescription</key>
 				<string>Provides device authentication (certificate or identity).</string>
@@ -50,11 +50,11 @@
 				<key>PayloadIdentifier</key>
 				<string>uk.co.abstractec.mdm.cert</string>
 				<key>PayloadOrganization</key>
-				<string>{{ config.organisation_name }}</string>
+				<string>{{ config.organisationName }}</string>
 				<key>PayloadType</key>
 				<string>com.apple.security.pkcs12</string>
 				<key>PayloadUUID</key>
-				<string>{{ config.cert_uuid }}</string>
+				<string>{{ config.certUUID }}</string>
 				<key>PayloadVersion</key>
 				<integer>1</integer>
 			</dict>
@@ -66,13 +66,13 @@
 		<key>PayloadIdentifier</key>
 		<string>uk.co.abstractec.eas.mdm</string>
 		<key>PayloadOrganization</key>
-		<string>{{ config.organisation_name }}</string>
+		<string>{{ config.organisationName }}</string>
 		<key>PayloadRemovalDisallowed</key>
 		<false/>
 		<key>PayloadType</key>
 		<string>Configuration</string>
 		<key>PayloadUUID</key>
-		<string>{{ config.master_profile_uuid }}</string>
+		<string>{{ config.masterProfileUUID }}</string>
 		<key>PayloadVersion</key>
 		<integer>1</integer>
 	</dict>

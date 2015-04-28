@@ -2,6 +2,10 @@
 require 'vendor/autoload.php';
 require '../../lib/db.php';
 
+function __autoload($class_name) {
+    include '../../lib/Classes/'.$class_name . '.php';
+}
+
 $slim = new \Slim\Slim(array(
 	'debug' => true,
 	'view' => new \Slim\Views\Twig()

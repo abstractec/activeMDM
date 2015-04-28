@@ -13,31 +13,31 @@
 			<label for="access_rights">
 				Access Rights
 			</label>
-			<input name="access_rights" class="form-control" type="text" value="{{ config.access_rights }}"/>
+			<input name="access_rights" class="form-control" type="text" value="{{ config.accessRights }}"/>
 		</div>
 		<div class="form-group">
 			<label for="organisation_name">
 				Organisation Name
 			</label>
-			<input name="organisation_name" class="form-control" type="text" value="{{ config.organisation_name }}"/>
+			<input name="organisation_name" class="form-control" type="text" value="{{ config.organisationName }}"/>
 		</div>
 		<div class="form-group">
 			<label for="master_profile_uuid">
 				Master Profile UUID
 			</label>
-			<input name="master_profile_uuid" class="form-control" type="text" value="{{ config.master_profile_uuid }}"/>
+			<input name="master_profile_uuid" class="form-control" type="text" value="{{ config.masterProfileUUID }}"/>
 		</div>
 		<div class="form-group">
 			<label for="cert_uuid">
 				Certificate UUID
 			</label>
-			<input name="cert_uuid" class="form-control" type="text" value="{{ config.cert_uuid }}"/>
+			<input name="cert_uuid" class="form-control" type="text" value="{{ config.certUUID }}"/>
 		</div>	
 		<div class="form-group">
 			<label for="mdm_uuid">
 				MDM Profile UUID
 			</label>
-			<input name="mdm_uuid" class="form-control" type="text" value="{{ config.mdm_uuid }}"/>
+			<input name="mdm_uuid" class="form-control" type="text" value="{{ config.mdmUUID }}"/>
 		</div>	
 		<div class="form-group">
 			<label for="mdm_certificate">
@@ -50,25 +50,19 @@
 			<label for="mdm_certificate_password">
 				MDM Certificate Password
 			</label>
-			<input name="mdm_certificate_password" class="form-control" type="text" value="{{ config.mdm_certificate_password }}"/>
+			<input name="mdm_certificate_password" class="form-control" type="text" value="{{ config.mdmCertificatePassword }}"/>
 		</div>	
 		<div class="form-group">
 			<label for="mdm_topic">
 				MDM Topic
 			</label>
-			<input name="mdm_topic" class="form-control" type="text" value="{{ config.mdm_topic }}"/>
+			<input name="mdm_topic" class="form-control" type="text" value="{{ config.pushTopic }}"/>
 		</div>	
 		<div class="form-group">
-			<label for="check_in_url">
-				Check In URL
+			<label for="root_url">
+				Root URL
 			</label>
-			<input name="check_in_url" class="form-control" type="text" value="{{ config.check_in_url }}"/>
-		</div>	
-		<div class="form-group">
-			<label for="service_url">
-				Service URL
-			</label>
-			<input name="service_url" class="form-control" type="text" value="{{ config.service_url }}"/>
+			<input name="root_url" class="form-control" type="text" value="{{ config.rootURL }}"/>
 		</div>	
 		<button type="submit" class="btn btn-success">Submit</button>
 	</form>

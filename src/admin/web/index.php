@@ -6,6 +6,10 @@ require '../../lib/command.php';
 
 use Rhumsaa\Uuid\Uuid;
 
+function __autoload($class_name) {
+    include '../../lib/Classes/'.$class_name . '.php';
+}
+
 $slim = new \Slim\Slim(array(
 	'debug' => true,
 	'view' => new \Slim\Views\Twig()
@@ -67,8 +71,7 @@ $slim->post('/config', function () use ($slim) {
 	$values["mdm_uuid"] = $_POST["mdm_uuid"];
 	$values["mdm_certificate_password"] = $_POST["mdm_certificate_password"];
 	$values["mdm_topic"] = $_POST["mdm_topic"];
-	$values["check_in_url"] = $_POST["check_in_url"];
-	$values["service_url"] = $_POST["service_url"];
+	$values["root_url"] = $_POST["root_url"];
 	
 	if ($_FILES["mdm_certificate"]['size'] > 0 and $_FILES["mdm_certificate"]["error"] > 0) {
 		$slim->flashNow('error', 'MDM Cerfiticate failed to upload');
@@ -80,7 +83,7 @@ $slim->post('/config', function () use ($slim) {
 			$values["mdm_certificate"] = $data;
 		}
 		
-		save_config($config["_id"], $values);
+		save_config($config->id, $values);
 		$slim->flashNow('success', 'Config Saved');
 		$config = get_config();
 	}

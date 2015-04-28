@@ -21,7 +21,7 @@
 			Access Rights
 		</div>
 		<div class="col-md-4">
-			{{ config.access_rights }}
+			{{ config.accessRights }}
 		</div>
 	</div>
 	<div class="row">
@@ -29,7 +29,7 @@
 			Organisation Name
 		</div>
 		<div class="col-md-4">
-			{{ config.organisation_name }}
+			{{ config.organisationName }}
 		</div>
 	</div>
 	<div class="row">
@@ -37,7 +37,7 @@
 			Master Profile UUID
 		</div>
 		<div class="col-md-4">
-			{{ config.master_profile_uuid }}
+			{{ config.masterProfileUUID }}
 		</div>
 	</div>
 	<div class="row">
@@ -45,7 +45,7 @@
 			Certificate UUID
 		</div>
 		<div class="col-md-4">
-			{{ config.cert_uuid }}
+			{{ config.certUUID }}
 		</div>
 	</div>	
 	<div class="row">
@@ -53,7 +53,7 @@
 			MDM Profile UUID
 		</div>
 		<div class="col-md-4">
-			{{ config.mdm_uuid }}
+			{{ config.mdmUUID }}
 		</div>
 	</div>	
 	<div class="row">
@@ -61,7 +61,7 @@
 			MDM Certificate
 		</div>
 		<div class="col-md-4">
-			{{ config.mdm_certificate }}
+			{{ config.mdmCertificate }}
 		</div>
 	</div>	
 	<div class="row">
@@ -69,7 +69,7 @@
 			MDM Certificate Password
 		</div>
 		<div class="col-md-4">
-			{{ config.mdm_certificate_password }}
+			{{ config.mdmCertificatePassword }}
 		</div>
 	</div>	
 	<div class="row">
@@ -77,23 +77,15 @@
 			MDM Topic
 		</div>
 		<div class="col-md-4">
-			{{ config.mdm_topic }}
+			{{ config.pushTopic }}
 		</div>
 	</div>	
 	<div class="row">
 		<div class="col-md-3">
-			Check In URL
+			Root URL
 		</div>
 		<div class="col-md-4">
-			{{ config.check_in_url }}
-		</div>
-	</div>	
-	<div class="row">
-		<div class="col-md-3">
-			Service URL
-		</div>
-		<div class="col-md-4">
-			{{ config.service_url }}
+			{{ config.rootURL }}
 		</div>
 	</div>	
 </div>
