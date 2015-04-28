@@ -17,7 +17,7 @@ function get_config() {
         $config->setValues($values);
         $config->id = $values["_id"];
 
-		return $config
+		return $config;
 	}	
 }
 
