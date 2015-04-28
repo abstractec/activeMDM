@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 require '../../lib/db.php';
-require '../../lib/classes/Config.php';
+require '../../lib/Classes/Config.php';
 
 
 $slim = new \Slim\Slim(array(
